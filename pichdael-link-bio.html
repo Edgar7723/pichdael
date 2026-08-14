@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pichdael | Link en Bio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --red: #ff131c;
+            --red-deep: #b30000;
+            --red-glow: #ff4d4d;
+            --black: #0a0a0a;
+            --charcoal: #161616;
+            --grey: #8a8a8a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: radial-gradient(circle at 50% 0%, #260404 0%, var(--black) 55%, #000 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 32px 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* --- Halo rojo de fondo --- */
+        body::before {
+            content: '';
+            position: fixed;
+            width: 65vmax;
+            height: 65vmax;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 19, 28, 0.22) 0%, transparent 65%);
+            top: -20%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 0;
+        }
+        body::after {
+            content: '';
+            position: fixed;
+            width: 60vmax;
+            height: 60vmax;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 19, 28, 0.12) 0%, transparent 60%);
+            bottom: -30%;
+            right: -15%;
+            z-index: 0;
+        }
+
+        /* --- Chispas cayendo, discretas --- */
+        .falling-elements {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .spark {
+            position: absolute;
+            top: -8%;
+            width: 3px;
+            height: 3px;
+            background: var(--red-glow);
+            border-radius: 50%;
+            opacity: 0.6;
+            box-shadow: 0 0 6px var(--red-glow);
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0%   { transform: translateY(-10vh); opacity: 0; }
+            10%  { opacity: 0.7; }
+            90%  { opacity: 0.4; }
+            100% { transform: translateY(110vh); opacity: 0; }
+        }
+
+        .spark.s1 { left: 8%;  animation-duration: 14s; animation-delay: 0s; }
+        .spark.s2 { left: 22%; animation-duration: 19s; animation-delay: 4s; }
+        .spark.s3 { left: 38%; animation-duration: 16s; animation-delay: 8s; }
+        .spark.s4 { left: 55%; animation-duration: 21s; animation-delay: 2s; }
+        .spark.s5 { left: 70%; animation-duration: 15s; animation-delay: 6s; }
+        .spark.s6 { left: 85%; animation-duration: 18s; animation-delay: 10s; }
+        .spark.s7 { left: 95%; animation-duration: 13s; animation-delay: 3s; }
+
+        /* --- Tarjeta principal --- */
+        .container {
+            background: linear-gradient(165deg, var(--charcoal) 0%, #0d0d0d 100%);
+            max-width: 380px;
+            width: 100%;
+            border-radius: 10px;
+            padding: 46px 32px 36px;
+            text-align: center;
+            box-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 19, 28, 0.35);
+            position: relative;
+            z-index: 1;
+        }
+
+        .container::before,
+        .container::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            border: 1.5px solid var(--red);
+        }
+        .container::before { top: 12px; left: 12px; border-right: none; border-bottom: none; }
+        .container::after  { bottom: 12px; right: 12px; border-left: none; border-top: none; }
+
+        .eyebrow {
+            display: inline-block;
+            font-size: 10px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--grey);
+            font-weight: 500;
+            margin-bottom: 22px;
+        }
+
+        .profile-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .profile-frame {
+            position: relative;
+            width: 116px;
+            height: 116px;
+        }
+
+        .ribbon-ring {
+            position: absolute;
+            inset: -6px;
+            border-radius: 50%;
+            border: 1.5px solid var(--red);
+            box-shadow: 0 0 18px rgba(255, 19, 28, 0.55);
+            z-index: 0;
+        }
+
+        .profile-pic {
+            width: 116px;
+            height: 116px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center;
+            border: 3px solid var(--black);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6);
+            display: block;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-weight: 400;
+            color: #fff;
+            font-size: 44px;
+            letter-spacing: 3px;
+            margin-bottom: 6px;
+            text-shadow: 0 0 20px rgba(255, 19, 28, 0.5);
+        }
+
+        .subtitle {
+            color: var(--red);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .divider {
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--red), transparent);
+            margin: 24px auto 26px;
+        }
+
+        .links-container {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .link-btn {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: #111;
+            color: #fff;
+            text-decoration: none;
+            padding: 17px 22px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 0.4px;
+            border: 1px solid #262626;
+            position: relative;
+            transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            text-align: left;
+        }
+
+        .link-btn img {
+            width: 22px;
+            height: 22px;
+            flex-shrink: 0;
+            transition: transform 0.3s ease, filter 0.3s ease;
+            filter: brightness(0) invert(1);
+        }
+
+        .link-btn .label {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .link-btn .label span.name {
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .link-btn .label span.tagline {
+            font-size: 10px;
+            color: var(--grey);
+            font-weight: 300;
+            letter-spacing: 0.4px;
+            margin-top: 1px;
+        }
+
+        .link-btn:hover {
+            border-color: var(--red);
+            background: linear-gradient(135deg, var(--red-deep) 0%, var(--red) 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 14px 30px rgba(255, 19, 28, 0.4);
+        }
+
+        .link-btn:hover .label span.tagline { color: rgba(255,255,255,0.8); }
+
+        .link-btn:hover img { transform: scale(1.08); }
+
+        .footer-note {
+            margin-top: 30px;
+            font-size: 9px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 500;
+            color: #4d4d4d;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="falling-elements">
+        <span class="spark s1"></span>
+        <span class="spark s2"></span>
+        <span class="spark s3"></span>
+        <span class="spark s4"></span>
+        <span class="spark s5"></span>
+        <span class="spark s6"></span>
+        <span class="spark s7"></span>
+    </div>
+
+    <div class="container">
+        <p class="eyebrow">Bienvenido</p>
+
+        <header class="profile-container">
+            <div class="profile-frame">
+                <div class="ribbon-ring"></div>
+                <img src="profile.png" alt="Pichdael" class="profile-pic" onerror="this.src='https://via.placeholder.com/116x116/161616/ff1313?text=PD'">
+            </div>
+        </header>
+
+        <h1>Pichdael</h1>
+        <p class="subtitle">Sígueme</p>
+
+        <div class="divider"></div>
+
+        <nav class="links-container">
+            <a href="https://www.tiktok.com/" class="link-btn" target="_blank">
+                <img src="tiktok.png" alt="TikTok" onerror="this.src='https://via.placeholder.com/22x22/ffffff/ffffff?text=TT'">
+                <span class="label">
+                    <span class="name">TikTok</span>
+                    <span class="tagline">@pichdael</span>
+                </span>
+            </a>
+
+            <a href="https://www.instagram.com/" class="link-btn" target="_blank">
+                <img src="instagram.png" alt="Instagram" onerror="this.src='https://via.placeholder.com/22x22/ffffff/ffffff?text=IG'">
+                <span class="label">
+                    <span class="name">Instagram</span>
+                    <span class="tagline">@pichdael</span>
+                </span>
+            </a>
+        </nav>
+
+        <p class="footer-note">Pichdael</p>
+    </div>
+
+</body>
+</html>
